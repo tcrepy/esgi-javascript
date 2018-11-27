@@ -1,4 +1,10 @@
 function type_check_v1(elem, type) {
+    if (type === 'null') {
+        return elem === null;
+    }
+    if (type === 'array') {
+        return Array.isArray(elem);
+    }
     return typeof elem === type;
 }
 
@@ -15,7 +21,7 @@ function type_check_v2(elem, conf) {
         ok = checkEnum;
     }
     if (conf.type) {
-        if (typeof elem !== conf.type) {
+        if (!type_check_v1(elem, conf.type)) {
             ok = 0;
         }
     }
@@ -31,12 +37,5 @@ function type_check_v3(elem, properties) {
 
 }
 
-
-console.log(type_check_v2(3, {enum: ["foo", "bar",3]}));
-console.log(type_check_v2(3, {type: 'number'}));
-console.log(type_check_v2(3, {type: 'string'}));
-console.log(type_check_v2(3, {type: 'number', value: 3}));
-console.log(type_check_v2(3, {type: 'number', value: 4}));
-console.log(type_check_v2(3, {type: 'string', value: 3}));
-console.log(type_check_v2(3, {value: 3}));
-console.log(type_check_v2(3, {value: 4}));
+console.log(typeof null);
+console.log(type_check_v1(null, 'null'));
