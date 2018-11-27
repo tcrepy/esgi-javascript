@@ -67,7 +67,12 @@ String.prototype.yoda = function () {
 };
 
 Object.prototype.prop_access = function (path) {
-
+    if (path === null || path === undefined) {
+        return null;
+    }
+    if (this === null) {
+        return null;
+    }
     let input = this;
     let pathArray = path.split('.');
     for (let i = 0; i < pathArray.length; i++) {
